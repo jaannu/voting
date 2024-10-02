@@ -1,22 +1,19 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const Vote = () => {
+const YearLogin = ({ match }) => {
   const history = useHistory();
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const post = query.get('post');
+  const year = match.params.year.toUpperCase();
 
-  const handleVoteSubmit = () => {
-    // Logic for submitting the vote can go here
-    history.push('/thank-you'); // Redirect to thank you page after voting
+  const handleLogin = () => {
+    // Logic for validating login can go here
+    history.push('/post-selection'); // Redirect to post selection page after login
   };
 
   return (
     <div style={styles.container}>
-      <h2>Vote for {post}</h2>
-      {/* Add voting options here */}
-      <button style={styles.button} onClick={handleVoteSubmit}>Submit Vote</button>
+      <h2>{year} Year Login</h2>
+      <button style={styles.button} onClick={handleLogin}>Login</button>
     </div>
   );
 };
@@ -43,4 +40,4 @@ const styles = {
   }
 };
 
-export default Vote;
+export default YearLogin;

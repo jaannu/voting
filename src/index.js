@@ -1,16 +1,52 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { useHistory } from 'react-router-dom';
 
+const Index = () => {
+  const history = useHistory();
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  const handleStudentClick = () => {
+    const studentYear = prompt("Enter your year (II, III, IV):").toUpperCase();
+    if (studentYear === 'II' || studentYear === 'III' || studentYear === 'IV') {
+      history.push(`/year-login/${studentYear.toLowerCase()}`); // Redirect to year-specific login
+    } else {
+      alert('Invalid year. Please enter II, III, or IV.');
+    }
+  };
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
+  const handleTeacherClick = () => {
+    history.push('/teacher-login');
+  };
 
+  return (
+    <div style={styles.container}>
+      <h1>Welcome to the Voting System</h1>
+      <button style={styles.button} onClick={handleStudentClick}>Student</button>
+      <button style={styles.button} onClick={handleTeacherClick}>Teacher</button>
+    </div>
+  );
+};
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: '#f0f0f0',
+    fontFamily: "'Algerian', serif",
+    textAlign: 'center',
+  },
+  button: {
+    padding: '10px 20px',
+    fontSize: '18px',
+    margin: '10px',
+    cursor: 'pointer',
+    border: 'none',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    borderRadius: '5px',
+  }
+};
+
+export default Index;
